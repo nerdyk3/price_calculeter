@@ -1,4 +1,4 @@
-# price_calculetor
+# price_calculator
 price calculator for KiRaiPe
 
 # Agenda of the software
