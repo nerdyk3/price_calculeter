@@ -9,9 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-<form method="POST" class="post-form">{% csrf_token %}
+{% block content %}
+    <h1>calcultor</h1>
+    <form method="POST" class="post-form">
+    	{% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="save btn btn-default">Save</button>
     </form>
+{% endblock %}
+
 </body>
 </html>
