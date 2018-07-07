@@ -7,13 +7,12 @@ from .forms import priceForm
 # Create your views here.
 
 def index(request):
-	if request.method=="POST":
-		form = priceForm(request.POST)
+	if request.method=="GET":
+		form = priceForm(request.GET)
 		if form.is_valid():
 			TotalDay=timezone.now()-cal.objects.user_date
 			if TotalDay<30:
 				user_price=cal.objects.price-(cal.objects.price*0.06)
-				messages.success(request, user_price)
 
 			elif TotalDay>31 or TotalDay<90:
 				user_price=cal.objects.price-(cal.objects.price*0.12)
@@ -32,6 +31,7 @@ def index(request):
 
 			elif TotalDay>2556 or TotalDay<4380:
 				user_price=cal.objects.price-(cal.objects.price*0.95)
+
 		return render(request,'price_cal/index.html',{'form':form})
 	else:
 		form = priceForm()
