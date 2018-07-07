@@ -1,3 +1,4 @@
+
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.utils import timezone
@@ -12,6 +13,7 @@ def index(request):
 			TotalDay=timezone.now()-cal.objects.user_date
 			if TotalDay<30:
 				user_price=cal.objects.price-(cal.objects.price*0.06)
+				messages.success(request, user_price)
 
 			elif TotalDay>31 or TotalDay<90:
 				user_price=cal.objects.price-(cal.objects.price*0.12)
@@ -32,5 +34,5 @@ def index(request):
 				user_price=cal.objects.price-(cal.objects.price*0.95)
 		return render(request,'price_cal/index.html',{'form':form})
 	else:
+		form = priceForm()
 		return render(request,'price_cal/index.html',{'form':form})
-
