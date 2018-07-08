@@ -2,12 +2,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Bubble SignUp Form a Flat Responsive Widget Template :: w3layouts</title>
+<link rel="icon" type="image/x-icon" href="http://www.kiraipe.com/wp-content/uploads/2017/08/2-01.png">
+<title>KiRaiPe Price Calculator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <!-- Custom Theme files -->
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -22,40 +23,53 @@
   } );
   </script>
 </head>
-<body>
+<body style="background: #673AB7;">
 	{%block content%}
-	<!-- main -->
-	<div class="main-w3layouts wrapper">
-		<h1>KiRaipi Price Calculator</h1>
+	<!-- main -->		
 		<div class="container">
-			<div class="row"> 
-				<div class="col-md-4 col-lg-4">
-					<form class="form-inline" action="result.html" method="GET"> 
-				        <div class="form-group">
-						    <label for="Item Name">Item Name:</label>
+			<div class="row">
+				<div class="col-md-4 col-lg-4 col-sm-4" style="margin-left: 10px">
+				<div class="card mx-xl-5">
+					<div class="card-body">
+			 <form class="form-inline" action="result.html" method="GET"> 
+			 	<p class="h4 text-center mb-4"><img src="http://www.kiraipe.com/wp-content/uploads/2017/08/2-01.png" class="img-fluid" ">
+			 	KiRaiPe:<br>Price Calculator</p>
+    			
+					
+				        <div class="md-form">
+						    <label for="Item Name" class="grey-text">Item Name:</label>
+						    <div class="form-control">
 						     {% csrf_token %}{{ form.item_name }}
 						 </div>
-				        <div class="form-group">
-						    <label for="Your Price">Your Price:</label>
+						 </div>
+				       <div class="md-form">
+						    <label for="Your Price" class="grey-text">Your Price:</label>
+						    <div class="form-control">
 						    {% csrf_token %}{{ form.price }}
 						</div>
-						 <div class="form-group form-inline">
-						    <label for="Date Of Buy" id="datepicker">Date Of Buy:</label>
-						    {% csrf_token %}{{ form.compare_date }}
 						</div>
-				         <div class="form-group form-inline">
-						    <label for="Date Of Buy" id="datepicker">Date Of Buy:</label>
+						 <div class="md-form">
+						    <label for="Date Of Buy" id="datepicker" class="grey-text">
+						    Select Current Date:</label><div class="form-control">
+						    {% csrf_token %}{{ form.compare_date }}</div>
+						</div>
+				         <div class="md-form">
+						    <label for="Date Of Buy" id="datepicker" class="grey-text">Date of Buy:</label>
+						    <div class="form-control">
 						    {% csrf_token %}{{ form.user_date }}
+							</div>
 						</div>
-					<div class="wthree-text">  
+					
+					<div class="text-center mt-4">  
 						<label class="anim">
 							<input type="checkbox" class="checkbox" required="">
 							<span>I Agree To The Terms & Conditions</span> 
 						</label>  
 						<div class="clear"> </div>
-					</div>   
-					<input type="submit" value="Submit">
-
+					 
+					<div class="text-center py-4 mt-3">
+                <button class="btn btn-outline-purple" type="submit">Send<i class="fa fa-paper-plane-o ml-2"></i></button>
+            </div>
 				</form>
 				
 			</div>	 
