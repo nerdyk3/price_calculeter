@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'price_cal',
 ]
 
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
