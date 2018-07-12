@@ -12,11 +12,4 @@ class priceForm(forms.ModelForm):
 	class Meta:
 		model= cal
 		fields = ('item_name','price','compare_date','user_date',)
-	user_date = forms.DateField(
-        widget=DateInput(format='%d/%m/%Y'),
-        input_formats=('%d/%m/%Y', )
-        )	
-	compare_date = forms.DateField(
-        widget=DateInput(format='%d/%m/%Y'),
-        input_formats=('%d/%m/%Y')
-        )
+	

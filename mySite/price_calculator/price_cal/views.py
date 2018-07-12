@@ -1,69 +1,60 @@
 
-from django.shortcuts import get_object_or_404, render, render_to_response
+from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.http import HttpResponse, Http404,HttpResponseRedirect,HttpResponseNotFound
 from django.utils import timezone
 from .models import cal
 from .forms import priceForm
 from django.template import Context,loader,RequestContext
+from django.contrib import messages
+
 # Create your views here.
+"""def userPrice(request,pk):
+	calcu=get_object_or_404(cal,pk=pk)
+	in_date = pk.user_date
+	out_date = pk.compare_date
+	Diff=in_date-out_date
+	if Diff.days<30:
+		user_price=pk.price-(pk.price*0.06)
+		return render(request,'price_cal/result.html',{'calcu':calcu})
+	else:
+		return render"""
 
 def index(request):
-	if request.method=="GET":
-		form = priceForm(request.GET)
-		if (form.is_valid()):
-			TotalDay=userDate()
-			if TotalDay<30:
-				user_price=cal.objects.price-(cal.objects.price*0.06)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
+	if request.method=="POST":
+		form = priceForm(request.POST)
+		if form.is_valid():
+			calcu=form.save(commit=False)
+			calcu.save()
+			Diff= calcu.user_date-calcu.compare_date
+			data = {'calcu':calcu,'Diff':Diff.days}
+			if Diff.days<30:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.06)
+			elif Diff.days>31 or Diff.days<90:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.12)
 
-			elif TotalDay>31 or TotalDay<90:
-				user_price=cal.objects.price-(cal.objects.price*0.12)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
+			elif Diff.days>91 or Diff.days<210:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.25)
 
-			elif TotalDay>91 or TotalDay<210:
-				user_price=cal.objects.price-(cal.objects.price*0.25)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
+			elif Diff.days>211 or Diff.days<365:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.50)
 
-			elif TotalDay>211 or TotalDay<365:
-				user_price=cal.objects.price-(cal.objects.price*0.50)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
+			elif Diff.days>366 or Diff.days<1095:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.62)
+			
+			elif Diff.days>1096 or Diff.days<2555:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.75)
 
-			elif TotalDay>366 or TotalDay<1095:
-				user_price=cal.objects.price-(cal.objects.price*0.62)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
-
-			elif TotalDay>1096 or TotalDay<2555:
-				user_price=cal.objects.price-(cal.objects.price*0.75)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
-
-			elif TotalDay>2556 or TotalDay<4380:
-				user_price=cal.objects.price-(cal.objects.price*0.95)
-				#userPrice(user_price)
-				return render_to_response('index.html',context_instance=RequestContext(request,{'user_price':user_price}))
-		return render(request,'price_cal/index.html',{'form':form})
+			elif Diff.days>2556 or Diff.days<4380:
+				data['user_price']=float(calcu.price)-(float (calcu.price)*0.95)
+			return render(request, 'price_cal/result.html',data)
 	else:
 		form = priceForm()
-		return render(request,'price_cal/index.html',{'form':form})
+	return render(request,'price_cal/index.html',{'form':form})
 
-def userDate(request):
-	isValid = False
-	while not isValid:
-	   	in_date = cal.user_date
-	   	out_date = cal.compare_date
-	   	try:
-	   		d = strptime(in_date, '%d/%m/%Y')
-	   		g = strptime(out_date, '%d/%m/%Y')
-	   		isValid = True
-	   	except :
-	   		print("this is not the right")
-	diff= g-d
-	return(diff)
-
-#def userPrice(user_price):
-	#return render_to_response('result.html',context_instance=RequestContext(request,{'user_price':user_price}))
+'''def userPriceCal(request,pk):
+	calcu=get_object_or_404(cal,pk=pk)
+	Diff=userDate()
+	if Diff<30:
+		user_price=pk.price-(pk.price*0.06)
+		return render(request,'price_cal/result.html',{'calcu':calcu})
+'''
