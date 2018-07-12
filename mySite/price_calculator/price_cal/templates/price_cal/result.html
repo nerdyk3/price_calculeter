@@ -2,19 +2,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+<link rel="icon" type="image/x-icon" href="http://www.kiraipe.com/wp-content/uploads/2017/08/2-01.png">
+<title>KiRaiPe Price Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<!-- Custom Theme files -->
+<link href="../css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<!-- //Custom Theme files -->
+<!-- web font --> 
+<link href="//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i" rel="stylesheet">
+<!-- //web font -->
+<script>
+function myFunction() {
+    window.print();
+}
+</script>
 </head>
-<body>
-	{% block content %}
-<h1>{{calcu.item_name}}</h1>
-{% if  Diff > 30 %}
- <p>{{calcu.price|linebreaksbr}}</p>
- 
-  <p>{{user_price|linebreaksbr}}</p>
- {%else%}
-  <p>{{user_price|linebreaksbr}}</p>
- {%endif%}
-{% endblock %}
+<body style="background: #673AB7;">
+	{%block content%}
+	<!-- main -->		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-lg-4 col-sm-4" style="padding-top: 4%;margin-left: 10px">
+				<div class="card mx-xl-5">
+					<div class="card-body">
+			 <form class="form-inline"> 
+			 	<p class="h4 text-center mb-4"><img src="http://www.kiraipe.com/wp-content/uploads/2017/08/2-01.png"  style="width:20%;align-items: center;">
+			 	KiRaiPe:<br>Price Calculator</p>
+    			
+					
+				        <div class="md-form">
+				<p><B>Your Item:</B>{{calcu.item_name}}</p>
+ 				<p><B>Your Price:</B>{{calcu.price|linebreaksbr}}</p>
+ 				<p><B>Date Of Purchase:</B>{{calcu.user_date|linebreaksbr}}</p>
+
+ 				<p><B>Today's Date:</B>{{calcu.compare_date|linebreaksbr}}</p>
+				<p><B>We will Pay You:</B>{{user_price|linebreaksbr}}</p>
+
+				</div><br>
+				<div class="text-center py-4 mt-3">
+                <button class="btn btn-outline-purple" type="submit">Back<i class="fa fa-paper-plane-o ml-2"></i></button>
+                <button onclick="myFunction()" class="btn btn-outline-purple" >Print this page</button>
+
+
+				</form>
+				
+			</div>	 
+		</div>	
+	</div>	
+	{% endblock %}
+	<!-- //main --> 
 </body>
 </html>
-

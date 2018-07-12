@@ -29,22 +29,22 @@ def index(request):
 			data = {'calcu':calcu,'Diff':Diff.days}
 			if Diff.days<30:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.06)
-			elif Diff.days>31 or Diff.days<90:
+			elif Diff.days>31 and Diff.days<90:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.12)
 
-			elif Diff.days>91 or Diff.days<210:
+			elif Diff.days>91 and Diff.days<210:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.25)
 
-			elif Diff.days>211 or Diff.days<365:
+			elif Diff.days>211 and Diff.days<365:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.50)
 
-			elif Diff.days>366 or Diff.days<1095:
+			elif Diff.days>366 and Diff.days<1095:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.62)
 			
-			elif Diff.days>1096 or Diff.days<2555:
+			elif Diff.days>1096 and Diff.days<2555:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.75)
 
-			elif Diff.days>2556 or Diff.days<4380:
+			elif Diff.days>2556 and Diff.days<4380:
 				data['user_price']=float(calcu.price)-(float (calcu.price)*0.95)
 			return render(request, 'price_cal/result.html',data)
 	else:
