@@ -11,8 +11,9 @@ KiRaiPe Calculator
 it will take price of item and date of purchesing through coustmer and give the output to coustmer with actual price.
 It is automated system for price calcultion of an item.
 
-# Time duration
-maximum 30 days with Testing
+# Specification 
+1. All Data Save in Data Base
+2. you can print the calculated price
 
 # Technology used
-Python – Django FrameWork
+Python – Django FrameWork(virtual)
